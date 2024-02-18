@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Entities;
 using MVCNetCoreKurumsalSiteProje.Tools;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class CategoriesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -91,7 +92,9 @@ namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
             {
                 try
                 {
-                    category.Image = await FileHelper.FileLoaderAsync(Image);
+                    if (Image is not null) // eğer IFormFile image geldiyse
+
+                        category.Image = await FileHelper.FileLoaderAsync(Image); // resmi yükle ve category image kolonunu güncelle
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }

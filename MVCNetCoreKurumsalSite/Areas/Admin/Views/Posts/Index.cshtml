@@ -18,6 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
             
             <th>
                 @Html.DisplayNameFor(model => model.Image)
@@ -41,6 +44,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
             
              <td>
                     <img src="/Images/@item.Image" height="30" alt="" />

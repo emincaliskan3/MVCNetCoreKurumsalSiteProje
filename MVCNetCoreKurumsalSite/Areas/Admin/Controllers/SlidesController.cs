@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Data;
 using Entities;
 using MVCNetCoreKurumsalSiteProje.Tools;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class SlidesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -91,7 +92,12 @@ namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
             {
                 try
                 {
-                    slide.Image = await FileHelper.FileLoaderAsync(Image);
+                    if (Image is not null)
+                    {
+                        slide.Image = await FileHelper.FileLoaderAsync(Image);
+                    }
+
+
                     _context.Update(slide);
                     await _context.SaveChangesAsync();
                 }
