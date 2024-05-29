@@ -16,6 +16,7 @@ namespace Data
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         // dbsetleri hazırladıktan sonra burada enable-migrations yapmıyoruz!!!
 
         // Veritabanı yoksa aşağıdaki package manager console u açıyoruz

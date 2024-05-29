@@ -12,7 +12,7 @@ namespace MVCNetCoreKurumsalSiteProje.Controllers
         {
             _context = context;
         }
-        [Route("tum-egitimlerimiz")]
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Posts.Where(p => p.IsActive).Include("Category").ToListAsync());

@@ -34,6 +34,11 @@ namespace MVCNetCoreKurumsalSiteProje.Controllers
         {
             return View();
         }
+        [Route("AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
         [Route("hakkimizda")]
         public ActionResult About()
         {

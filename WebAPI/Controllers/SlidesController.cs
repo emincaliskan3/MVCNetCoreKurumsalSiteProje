@@ -1,5 +1,6 @@
 ﻿using Data;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing;
@@ -11,6 +12,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SlidesController : ControllerBase
     {
         private readonly DatabaseContext _context;
@@ -41,9 +43,9 @@ namespace WebAPI.Controllers
 
         // POST api/<SlidesController>
         [HttpPost]
-        public async Task<ActionResult<Slide>> Post([FromBody] Slide value, IFormFile? Image)
+        public async Task<ActionResult<Slide>> Post([FromBody] Slide value)
         {
-            value.Image = await FileHelper.FileLoaderAsync(Image);
+
             await _context.Slides.AddAsync(value);
             await _context.SaveChangesAsync();
             return Ok(value);
@@ -51,12 +53,9 @@ namespace WebAPI.Controllers
 
         // PUT api/<SlidesController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Slide>> Put(int id, [FromBody] Slide value, IFormFile? Image)
+        public async Task<ActionResult<Slide>> Put(int id, [FromBody] Slide value)
         {
-            if (Image is not null)
-            {
-                value.Image = await FileHelper.FileLoaderAsync(Image);
-            }
+
             _context.Slides.Update(value);
             await _context.SaveChangesAsync();
             return Ok(value);

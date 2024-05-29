@@ -5,9 +5,9 @@ namespace Entities
     public class Category : IEntity
     {
         public int Id { get; set; }
-        [Display(Name = "Adı"), StringLength(150), Required]
+        [Display(Name = "Kategori Adı"), StringLength(150), Required]
         public string Name { get; set; }
-        [Display(Name = "Açıklama"), DataType(DataType.MultilineText)]
+        [Display(Name = "Kategori Açıklaması"), DataType(DataType.MultilineText)]
         public string? Description { get; set; }
         [Display(Name = "Resim"), StringLength(150)]
         public string? Image { get; set; }
@@ -17,6 +17,13 @@ namespace Entities
         public bool IsHome { get; set; }
         [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)] // ScaffoldColumn(false) özelliği oluşturulacak view ekranlarında bu alanı oluşturma demektir.
         public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Display(Name = "Üst Menüde Göster")]
+        public bool IsTopMenu { get; set; }
+        [Display(Name = "Üst Kategori")]
+        public int ParentId { get; set; }
+        [Display(Name = "Sıra No")]
+        public int OrderNo { get; set; }
         public virtual List<Post>? Posts { get; set; }
+        public virtual List<Product>? Products { get; set; }
     }
 }

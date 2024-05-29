@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize]
+    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
     public class PostsController : Controller
     {
         private readonly DatabaseContext _context;
@@ -89,7 +89,7 @@ namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Post post, IFormFile? Image)
+        public async Task<IActionResult> Edit(int id, Post post, IFormFile? Image, bool cbResmiSil = false)
         {
             if (id != post.Id)
             {
@@ -100,6 +100,10 @@ namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (cbResmiSil == true)
+                    {
+                        post.Image = string.Empty;
+                    }
                     if (Image is not null)
                     {
                         post.Image = await FileHelper.FileLoaderAsync(Image);

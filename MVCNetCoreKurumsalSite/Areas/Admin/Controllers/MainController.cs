@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize]
     public class MainController : Controller
     {
         private readonly DatabaseContext _context; // sağ tık > ampul > generate constructor
@@ -42,7 +42,7 @@ namespace MVCNetCoreKurumsalSiteProje.Areas.Admin.Controllers
                     {
                         new Claim(ClaimTypes.Email, kullanici.Email),
                         new Claim(ClaimTypes.Name, kullanici.Name),
-                        new Claim(ClaimTypes.Role, kullanici.IsAdmin? "Admin" : "Person"),
+                        new Claim(ClaimTypes.Role, kullanici.IsAdmin? "Admin" : "Personal"),
 
 
                     };

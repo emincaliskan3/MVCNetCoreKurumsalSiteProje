@@ -2,11 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Data;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly DatabaseContext _context;
@@ -24,7 +26,7 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -39,13 +41,10 @@ namespace WebAPI.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut] //("{id}")
+        public async Task<IActionResult> PutUser(User user)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+
 
             _context.Entry(user).State = EntityState.Modified; //  _context.users.update metodunun yaptığı iş
 
@@ -55,7 +54,7 @@ namespace WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(user.Id))
                 {
                     return NotFound();
                 }

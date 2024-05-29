@@ -233,26 +233,26 @@
                 })
         }
         function Delete(id) {
-         
-            fetch("https://localhost:7188/api/categories/" + id, {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" }
-               
-            }) // fetch bitiş
-                .then((response) => {
-                    if (response.ok) { // eğer işlem sonucu başarılıysa sunucudan ok cevabı geliyor
-                        location.reload();  // sayfayı yenile
+            if (confirm("Kaydı Silmek İstiyor Musunuz?")) {
+                fetch("https://localhost:7188/api/categories/" + id, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" }
 
-                    }
-                    else {
-                        throw new Error("İşlem Başarısız Oldu!") // hata fırlat
-                    }
-                }) // then bitiş
-                .catch(error => {
-                    console.error("Hata Oluştu!", error)
-                    alert("Hata Oluştu!")
-                })
+                }) // fetch bitiş
+                    .then((response) => {
+                        if (response.ok) { // eğer işlem sonucu başarılıysa sunucudan ok cevabı geliyor
+                            location.reload();  // sayfayı yenile
 
+                        }
+                        else {
+                            throw new Error("İşlem Başarısız Oldu!") // hata fırlat
+                        }
+                    }) // then bitiş
+                    .catch(error => {
+                        console.error("Hata Oluştu!", error)
+                        alert("Hata Oluştu!")
+                    })
+            }
         }
         
 
