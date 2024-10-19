@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace WebApiUsing.Areas.Admin.Controllers
 {
-    [Area("Admin"), Authorize]
+    [Area("Admin")]
     public class MainController : Controller
     {
         private readonly HttpClient _httpClient;

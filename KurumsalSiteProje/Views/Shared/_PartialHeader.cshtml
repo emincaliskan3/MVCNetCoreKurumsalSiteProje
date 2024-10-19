@@ -15,15 +15,21 @@
             @await Component.InvokeAsync("Categories")
 
             <li><a href="/iletisim" class="nav-link px-2 link-secondary">İletişim</a></li>
+            <li>
+                <form asp-controller="Posts" asp-action="Search" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input name="q" type="search" class="form-control form-control-dark " placeholder="Ara..." aria-label="Search">
+                </form>
+            </li>
+            <li>
+                <button type="button" class="btn btn-outline-dark me-2">Giriş</button>
+            </li>
         </ul>
-        <form asp-controller="Posts" asp-action="Search" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input name="q" type="search" class="form-control form-control-dark " placeholder="Ara..." aria-label="Search">
-        </form>
+        
         <div class="text-end">
-            <button type="button" class="btn btn-outline-primary me-2">Giriş</button>
-            <button type="button" class="btn btn-primary">Kayıt</button>
+           
+            
         </div>
-        <div class="dropdown">
+       @*  <div class="dropdown">
             @{
                 Cart cart = Context.Session.GetJson<Cart>("Cart");
                 if (cart != null)
@@ -56,6 +62,6 @@
                 }
             }
            
-        </div>
+        </div> *@
     </header>
 </div>
